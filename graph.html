@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Walk Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Walk Progress</h1>
+  <canvas id="walkChart" width="800" height="400"></canvas>
+  <script>
+    const rawData = JSON.parse(localStorage.getItem('walkData') || '{}');
+    const ctx = document.getElementById('walkChart').getContext('2d');
+    const datasets = Object.keys(rawData).map(name => {
+      const sorted = rawData[name].sort((a, b) => a.date.localeCompare(b.date));
+      return {
+        label: name,
+        data: sorted.map(e => ({ x: e.date, y: e.kms })),
+        fill: false,
+        borderColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+        tension: 0.1
+      };
+    });
+
+    new Chart(ctx, {
+      type: 'line',
+      data: { datasets },
+      options: {
+        parsing: false,
+        scales: {
+          x: { type: 'time', time: { unit: 'day' }, title: { display: true, text: 'Date' }},
+          y: { title: { display: true, text: 'Kilometers Walked' }}
+        }
+      }
+    });
+  </script>
+</body>
+</html>
