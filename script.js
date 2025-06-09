@@ -1,4 +1,4 @@
-const ENDPOINT = "PASTE_YOUR_WEB_APP_URL_HERE";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbwZw7VT0gFM2O9VWbyVaFsjq7hdxroj_cryqJlmufxRNwKX2brjm5gJo3T2A_nh8hF7/exec";
 
 document.getElementById('date').value = new Date().toISOString().split('T')[0];
 const nameInput = document.getElementById('name');
