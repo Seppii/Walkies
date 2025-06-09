@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Walk Graph</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-  <h1>Walk Progress</h1>
-  <canvas id="walkChart" width="800" height="400"></canvas>
-  <script>
-    const rawData = JSON.parse(localStorage.getItem('walkData') || '{}');
+<script>
+const ENDPOINT = "PASTE_YOUR_WEB_APP_URL_HERE";
+
+fetch(ENDPOINT)
+  .then(res => res.json())
+  .then(rawData => {
     const ctx = document.getElementById('walkChart').getContext('2d');
     const datasets = Object.keys(rawData).map(name => {
       const sorted = rawData[name].sort((a, b) => a.date.localeCompare(b.date));
@@ -32,6 +27,5 @@
         }
       }
     });
-  </script>
-</body>
-</html>
+  });
+</script>
